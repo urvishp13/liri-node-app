@@ -21,8 +21,8 @@ function concertThis(artist) {
         var venue = JSON.parse(body)[i].venue;
         // store the date of the concert
         var date = JSON.parse(body)[i].datetime;
-        // NEED TO FORMAT THIS USING MOMENT
-        console.log(date)
+        // date converted using moment
+        var date = moment(date).format('MM/DD/YYYY');
 
         // get name of venue
         var nameOfVenue = venue.name;
@@ -34,8 +34,12 @@ function concertThis(artist) {
         var venueCountry = venue.country;
 
         // log the results
-        console.log("[Name of venue: " + nameOfVenue + "\n" +
-          "Venue location: " + venueCity + ", " + venueRegion + ", " + venueCountry + "]"
+        console.log(`
+        ----------
+        Name of venue: ${nameOfVenue}
+        Venue location: ${venueCity}, ${venueRegion}, ${venueCountry}
+        Date: ${date}
+        ----------`
         );
       }
     }
@@ -179,6 +183,6 @@ else if (action === "do-what-it-says") {
       var artist = dataArr[1];
       concertThis(artist);
     }
-    
+
   })
 }
