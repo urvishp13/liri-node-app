@@ -47,10 +47,12 @@ function concertThis(artist) {
 }
 
 function theSignSpotifySearch(song){
+  // initialize a spotify search
   spotify.search({
     type: 'track',
     query: song
   }, function (err, data) {
+    // if there is an error
     if (err) {
       return console.log('Error occurred: ' + err);
     }
@@ -63,6 +65,8 @@ function theSignSpotifySearch(song){
       if (artist === "Ace of Base" && songName === "The Sign") {
         var url = data.tracks.items[i].external_urls.spotify
         var album = data.tracks.items[i].album.name
+        
+        // log the results
         console.log(`
           -------------
           Artist: ${artist}
@@ -76,10 +80,12 @@ function theSignSpotifySearch(song){
 }
 
 function generalSpotifyThisSong(song) {
+  // initialize a spotify search
   spotify.search({
     type: 'track',
     query: song
   }, function (err, data) {
+    // if there is an error
     if (err) {
       return console.log('Error occurred: ' + err);
     }
@@ -90,6 +96,8 @@ function generalSpotifyThisSong(song) {
       var songName = data.tracks.items[i].name;
       var url = data.tracks.items[i].external_urls.spotify
       var album = data.tracks.items[i].album.name
+      
+      // log the results
       console.log(`
       -------------
       Artist: ${artist}
@@ -171,15 +179,18 @@ else if (action === "do-what-it-says") {
     // split the content and store it in an array
     var dataArr = data.split(",");
 
-    if (dataArr[0] === "spotify-this-song") {
+    // store the command, which is the first element in the array
+    var command = dataArr[0];
+  
+    if (command === "spotify-this-song") {
       var song = dataArr[1];
       generalSpotifyThisSong(song);
     }
-    else if (dataArr[0] === "movie-this") {
+    else if (command === "movie-this") {
       var movie = dataArr[1]
       movieThis(movie);
     }
-    else if (dataArr[0] === "concert-this") {
+    else if (command === "concert-this") {
       var artist = dataArr[1];
       concertThis(artist);
     }
